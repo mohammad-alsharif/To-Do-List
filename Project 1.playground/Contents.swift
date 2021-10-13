@@ -1,29 +1,16 @@
 import UIKit
 import Foundation
-//// TO DO:
-///1. git init
-///2. add git ignore
-///3. git add .
-///4. git commit -m "MEEEEESSSSSAAAAAG"
-///5. FIX DELETE ERROR (OUT OF RANGE)
-///6. git add .
-///7. git commit -m "Handle Delete Error"
-///8. DEVELOP UPDATE FUN
-///
-///
 
 
-
-
-// Creat enumerations
+// Create Status enumerations
 enum TaskStatus {
-case completed
-case incompleted
+case ready
+case notReady
 }
 
 
 
-// Creat straucture
+// Create Item straucture
 struct Item {
     var item: String
     var status: TaskStatus
@@ -31,32 +18,37 @@ struct Item {
 }
 
 
-// Creat structure
+// Create List structure
 struct List {
     var listTitle: String
     var items : [Item] = []
 
 
     
-// Creat read task
+// Create Add Task
     mutating func addTask(item: Item) {
         self.items.append(item)
     }
     
     
-// Creat read Task
+// Create Read Task
     mutating func readTask() {
         for read in self.items {
-            print(read.item)
+            print("\(read.item) , \(read.status)")
         }
     }
     
-// ubdate task
-  mutating func updateTask(index: Int) {
-      
+// Create Update Task
+    mutating func updateTaskStatus(index: Int, newStatus: TaskStatus) {
+        if index < items.count {
+            self.items[index].status = newStatus
+        } else {
+            print("out of range")
+        }
+        
     }
     
-// delete value
+// Create Delete value
     mutating func removeTask(index: Int) {
         if index < items.count {
             self.items.remove(at: index)
@@ -69,7 +61,7 @@ struct List {
 }
 
 
-// Creat class
+// Create class
 class ToDoList {
     var list: List
     
@@ -79,31 +71,38 @@ class ToDoList {
 }
 
 
-// Create an object
-var Terminal = Item(item: "Terminal in Tuwaiq 1000", status: .incompleted )
+// Create objects
+var bedTime = Item(item: "Bed Time at 10:30 PM", status: .ready )
 
-var swift = Item(item: "Swift in Tuwaiq 1000", status: .completed)
+var wakeUpTime = Item(item: "Wake up time at 5:00 AM", status: .ready)
 
-var ios = Item(item: "IOS in Tuwaiq 1000", status: .incompleted)
+var doingWalking = Item(item: "Doing walking at 6:00 AM", status: .notReady)
+
+var goingToWork = Item(item: "Going to work at 7:30 AM", status: .notReady)
 
 var list1 = List(listTitle: "Work in the first week")
 
 
 
+// Add value
+list1.addTask(item: bedTime)
+list1.addTask(item: wakeUpTime)
+list1.addTask(item: doingWalking)
 
-list1.addTask(item: Terminal)
-list1.addTask(item: swift)
-list1.addTask(item: ios)
+
+
+// Read value
 list1.readTask()
 
 
-
 // update value
+list1.updateTaskStatus(index: 3, newStatus: .ready)
 
+list1.readTask()
 
 
 
 // delete value
 list1.removeTask(index: 0)
-list1.readTask()
 
+list1.readTask()
