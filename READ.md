@@ -7,7 +7,6 @@ It contains the variables related to the action or event that we want to save, a
 
 - Title: Contains the name of the action or event
 - Status: Contains the name of the event state (if it has been - completed  it will be true and if it has not it will be false)
--id
 
 
 - List struct
